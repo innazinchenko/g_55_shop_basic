@@ -17,9 +17,19 @@ public class Product {
         return price;
     }
 
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public Long getId() {
         return id;
     }
+
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -38,4 +48,5 @@ public class Product {
         return String.format("Product: id - %d, title - %s, price - %.2f, active - %s.",
                 id, title, price, active ? "yes" : "no");
     }
+
 }
