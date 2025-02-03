@@ -57,4 +57,14 @@ public class Product {
                 id, title, price, active ? "yes" : "no");
     }
 
+    public Product(String title, double price) {
+        this.title = title;
+        this.price = price;
+    }
+
+
+    public Product(Long id, double price) {
+        this.id = id;
+        this.price = price;
+    }
 }
