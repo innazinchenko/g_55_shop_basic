@@ -13,6 +13,14 @@ public class Product {
         return active;
     }
 
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
     public double getPrice() {
         return price;
     }
