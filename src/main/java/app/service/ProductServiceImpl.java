@@ -6,8 +6,27 @@ import app.exceptions.ProductSaveException;
 import app.exceptions.ProductUpdateException;
 import app.repository.ProductRepository;
 
-import java.awt.print.PrinterException;
 import java.util.List;
+
+// Это сервис продуктов. Он является частью третьего слоя нашего приложения.
+// Его задача - содержать бизнес-логику приложения, то есть код,
+// который выполняет те задачи, ради которых и создаётся приложение.
+// При этом сервис не должен принимать никаких запросов, поступивших
+// в приложение извне (это задача 4 слоя), а ещё он никогда
+// не должен обращаться напрямую в базу данных (это задача 2 слоя).
+
+// Для запросов в базу данных сервис должен взаимодействовать
+// со вторым слоем - с репозиторием. Получается, что сервис должен
+// обращаться к объекту репозитория и вызывать его методы.
+// Поэтому здесь мы определяем поле, которое и будет содержать объект репозитория,
+// чтобы сервис в своих методах мог к нему обращаться.
+// Данное поле имеет тип ProductRepository, а это интерфейс.
+// Это позволяет нам в это поле передавать не только объект какого-то конкретного
+// класса, а объект любого класса, который реализует интерфейс ProductRepository.
+// Принцип слабой связности (loose coupling principle) говорит нам о том,
+// что классы не должны зависеть от других классов.
+// Классы должны зависеть от абстракции, то есть от интерфейсов.
+
 
 public class ProductServiceImpl implements ProductService {
 
@@ -25,7 +44,7 @@ public class ProductServiceImpl implements ProductService {
         }
 
         String title = product.getTitle();
-        if (title == null || title.length() < 3) {
+        if (title == null || title.trim().isEmpty() || title.length() < 3) {
             throw new ProductSaveException("Product title should be at least 3 characters long");
         }
 
